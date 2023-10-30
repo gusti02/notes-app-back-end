@@ -2,6 +2,7 @@
 
 // membuat web server menggunakan hapi
 const Hapi = require('@hapi/hapi');
+const routes = require('./routes');
 
 const init = async () => {
   const server = Hapi.server({
@@ -9,7 +10,9 @@ const init = async () => {
     host: 'localhost',
   });
 
-  
+  // menjalankan routing
+  server.route(routes);
+
   await server.start();
   console.log(`Server sedang berjalan pada ${server.info.uri}`);
 };
