@@ -1,4 +1,4 @@
-const { addNoteHandler } = require('./handler').default;
+const { addNoteHandler } = require('./handler');
 
 // membuat routing yang berisi array
 const routes = [
@@ -9,5 +9,5 @@ const routes = [
   },
 ];
 
-// expoet module route
+// export module route
 module.exports = routes;
