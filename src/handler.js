@@ -68,7 +68,7 @@ const getAllNotesHandler = () => ({
 const getNoteByIdHandler = (request, h) => {
   const { id } = request.params;
   // melakukan filter dari object data id dan mengambil id index pertama
-  const note = notes.filter((n) => n.id === id)[0];
+  const note = notes.filter((note) => note.id === id)[0];
 
   // untuk memastikan objek tidak bernilai undefined,
   // jika bernila undefined maka akan mengembalikan respon gagal
@@ -128,5 +128,33 @@ const editNoteByIdHandler = (request, h) => {
   return response;
 } 
 
+// fungsi ini untuk menghapus note berdasarkan id
+const deleteNoteByIdHandler = (request, h) => {
 
-module.exports = { addNoteHandler, getAllNotesHandler, getNoteByIdHandler, editNoteByIdHandler };
+  const { id } = request.params;
+
+  // mencari imdex id menggunakan findIndex()
+  const index = notes.findIndex((note) => note.id === id);
+
+  // menghapus data pada array berdasarkan index, menggunakan method array splice()
+  if (index !== -1) {
+    notes.splice(index, 1);
+    const response = h.response({
+      status: 'success',
+      message: 'Catatan berhasil dihapus',
+    });
+    response.code(200);
+    return response;
+  }
+
+  const response = h.response({
+    status: 'fail',
+    message: 'Catatan gagal dihapus. Id tidak ditemukan',
+  });
+  response.code(404);
+  return response;
+
+}
+
+
+module.exports = { addNoteHandler, getAllNotesHandler, getNoteByIdHandler, editNoteByIdHandler, deleteNoteByIdHandler };
