@@ -1,4 +1,4 @@
-const { addNoteHandler, getAllNotesHandler, getNoteByIdHandler } = require('./handler');
+const { addNoteHandler, getAllNotesHandler, getNoteByIdHandler, editNoteByIdHandler } = require('./handler');
 
 // membuat routing yang berisi array
 const routes = [
@@ -21,6 +21,13 @@ const routes = [
     method: 'GET',
     path: '/notes/{id}',
     handler: getNoteByIdHandler,
+  },
+
+  {
+    // route ini untuk mengubah catatan berdasarkan id
+    method: 'PUT',
+    path: '/notes/{id}',
+    handler: editNoteByIdHandler,
   }
 ];
 
