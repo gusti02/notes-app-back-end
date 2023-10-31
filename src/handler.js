@@ -90,4 +90,43 @@ const getNoteByIdHandler = (request, h) => {
     return response;
 };
 
-module.exports = { addNoteHandler, getAllNotesHandler, getNoteByIdHandler };
+// fungsi ini untuk mengedit catatan berdasarkan id
+const editNoteByIdHandler = (request, h) => {
+  const { id } = request.params;
+
+  const { title, tags, body } = request.payload;
+  const updateAt = new Date().toISOString();
+
+  // mencari id menggunakan method dari array findIndex()
+  // dan mengambil nomor indexnya
+  const index = notes.findIndex((note) => note.id === id);
+
+  // Jika note dengan id yang dicari ditemukan, maka index akan bernilai array index
+  // dari objek catatan yang dicari. Tapi jika tidak ditemukan, maka index bernilai -1
+  if (index !== -1) {
+    notes[index] = {
+      ...notes[index],
+      title,
+      tags,
+      body,
+      updateAt,
+    };
+
+    const response = h.response({
+      status: 'success',
+      message: 'Gatatan berhasil diperbarui',
+    });
+    response.code(200);
+    return response;
+  }
+
+  const response = h.response({
+    status: 'fail',
+    message: 'Gagal memperbarui catatan. Id tidak ditemukan',
+  });
+  response.code(404);
+  return response;
+} 
+
+
+module.exports = { addNoteHandler, getAllNotesHandler, getNoteByIdHandler, editNoteByIdHandler };
