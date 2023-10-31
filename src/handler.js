@@ -68,7 +68,7 @@ const getAllNotesHandler = () => ({
 const getNoteByIdHandler = (request, h) => {
   const { id } = request.params;
   // melakukan filter dari object data id dan mengambil id index pertama
-  const note = notes.filter((note) => note.id === id)[0];
+  const note = notes.filter((n) => n.id === id)[0];
 
   // untuk memastikan objek tidak bernilai undefined,
   // jika bernila undefined maka akan mengembalikan respon gagal
@@ -155,6 +155,5 @@ const deleteNoteByIdHandler = (request, h) => {
   return response;
 
 }
-
 
 module.exports = { addNoteHandler, getAllNotesHandler, getNoteByIdHandler, editNoteByIdHandler, deleteNoteByIdHandler };
