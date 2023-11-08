@@ -39,9 +39,9 @@ const addNoteHandler = (request, h) => {
   if (isSuccess) {
     const response = h.response({
       status: 'success',
-      message: 'Catatan berhasil ditemukan',
+      message: 'Catatan berhasil ditambahkan',
       data: {
-        nodeId: id,
+        noteId: id,
       },
     });
     response.code(201);
